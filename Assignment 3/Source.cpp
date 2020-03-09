@@ -56,6 +56,22 @@ public:
 		}
 		return result;
 	}
+
+	//This function calculate the sum of all nodes recursively
+	int r_sum(Node* root) {
+		int result = 0;
+		if (root != NULL) {
+			result += root->data;
+			//Calculate sum of the left sub-trees
+			if (root->nextLeft != NULL)
+				result += r_sum(root->nextLeft);
+			//Calculate sum of the right sub-trees
+			if (root->nextRight != NULL) {
+				result += r_sum(root->nextRight);
+			}
+		}
+		return result;
+	}
 };
 
 //This function gets input for the tree
@@ -117,21 +133,7 @@ void get_data(Binary_Tree& tree) {
 	}
 }
 
-//This function calculate the sum of all nodes recursively
-int r_sum(Node* root) {
-	int result = 0;
-	if (root != NULL) {
-		result += root->data;
-		//Calculate sum of the left sub-trees
-		if (root->nextLeft != NULL)
-			result += r_sum(root->nextLeft);
-		//Calculate sum of the right sub-trees
-		if (root->nextRight != NULL) {
-			result += r_sum(root->nextRight);
-		}
-	}
-	return result;
-}
+
 int main() {
 	int num;
 	Node* temp = new Node;
@@ -145,7 +147,7 @@ int main() {
 	cout << endl << "Preorder Traversal: " << tree.pre_order(tree.get_root()) << endl;
 	
 	//Calculate the sum
-	cout << "Sum = " << r_sum(tree.get_root()) << endl;
+	cout << "Sum = " << tree.r_sum(tree.get_root()) << endl;
 
 	system("pause");
 	return 0;
